@@ -1,4 +1,4 @@
-# mala
+# Mála
 
 ETS bags, an in-memory table where one key can have multiple values.
 
