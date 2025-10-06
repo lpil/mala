@@ -1,6 +1,6 @@
 # Mála
 
-ETS bags, an in-memory table where one key can have multiple values.
+ETS bags, an in-memory table where one key can have multiple values!
 
 [![Package Version](https://img.shields.io/hexpm/v/mala)](https://hex.pm/packages/mala)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/mala/)
