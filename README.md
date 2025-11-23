@@ -21,3 +21,8 @@ pub fn main() -> Nil {
 ```
 
 Further documentation can be found at <https://hexdocs.pm/mala>.
+
+## What does the name mean?
+
+Mála is a Gaeilge word meaning bag. It's pronounced
+[like this](https://www.focloir.ie/media/ei/sounds_ogg/ma_xla_m.ogg).
