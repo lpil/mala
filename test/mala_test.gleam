@@ -1,3 +1,4 @@
+import gleam/erlang/process
 import gleeunit
 import mala
 
@@ -79,4 +80,38 @@ pub fn drop_table_test() {
   assert mala.insert(bag, "one", 1) == Error(Nil)
 
   mala.drop_table(bag)
+}
+
+pub fn private_test() {
+  let bag = mala.new_private()
+  assert mala.insert(bag, "one", 1) == Ok(Nil)
+  assert mala.get(bag, "one") == Ok([1])
+  assert mala.get(bag, "two") == Ok([])
+
+  let subject = process.new_subject()
+  process.spawn(fn() {
+    // Others cannot write
+    assert mala.insert(bag, "one", 1) == Error(Nil)
+    // Others cannot read
+    assert mala.get(bag, "one") == Error(Nil)
+    process.send(subject, Nil)
+  })
+  assert process.receive(subject, 100) == Ok(Nil)
+}
+
+pub fn protected_test() {
+  let bag = mala.new_protected()
+  assert mala.insert(bag, "one", 1) == Ok(Nil)
+  assert mala.get(bag, "one") == Ok([1])
+  assert mala.get(bag, "two") == Ok([])
+
+  let subject = process.new_subject()
+  process.spawn(fn() {
+    // Others cannot write
+    assert mala.insert(bag, "one", 1) == Error(Nil)
+    // Others can read write
+    assert mala.get(bag, "one") == Ok([1])
+    process.send(subject, Nil)
+  })
+  assert process.receive(subject, 100) == Ok(Nil)
 }

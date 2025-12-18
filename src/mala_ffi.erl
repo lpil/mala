@@ -1,11 +1,11 @@
 -module(mala_ffi).
 -export([
-    bag_new/0, bag_get/2, bag_insert/3, bag_delete/3, drop/1,
+    bag_new/1, bag_get/2, bag_insert/3, bag_delete/3, drop/1,
     bag_delete_value/2, bag_delete_key/2
 ]).
 
-bag_new() ->
-    ets:new(ethos_table, [bag, public]).
+bag_new(Access) ->
+    ets:new(ethos_table, [bag, Access]).
 
 bag_get(Bag, Key) ->
     try

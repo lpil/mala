@@ -7,14 +7,59 @@
 ///
 pub type BagTable(k, v)
 
-/// Create a new bag. The protection mode is `public`, so it can be accessed
-/// from any process.
+/// Create a new bag.
 ///
 /// The process that calls this function is the owner of the ETS table, and the
 /// table will be dropped when the owner process terminates.
 ///
+/// The access control is set to allow all processes to read and write to the
+/// table.
+///
+/// See `new_protected` and `new_private` for other access control options.
+///
+pub fn new() -> BagTable(k, v) {
+  create_ets_table(Public)
+}
+
+/// Create a new bag.
+///
+/// The process that calls this function is the owner of the ETS table, and the
+/// table will be dropped when the owner process terminates.
+///
+/// The access control is set so only the process that created the table can
+/// write to it. All other processes can read from it.
+///
+/// See `new` and `new_private` for other access control options.
+///
+pub fn new_protected() -> BagTable(k, v) {
+  create_ets_table(Protected)
+}
+
+/// Create a new bag.
+///
+/// The process that calls this function is the owner of the ETS table, and the
+/// table will be dropped when the owner process terminates.
+///
+/// The access control is set so only the process that created the table can
+/// read from and write to it. All other processes cannot access the table.
+///
+/// See `new` and `new_protected` for other access control options.
+///
+pub fn new_private() -> BagTable(k, v) {
+  create_ets_table(Private)
+}
+
 @external(erlang, "mala_ffi", "bag_new")
-pub fn new() -> BagTable(k, v)
+fn create_ets_table(mode: NonOwnerAccess) -> BagTable(k, v)
+
+type NonOwnerAccess {
+  // read-write
+  Public
+  // read
+  Protected
+  // none
+  Private
+}
 
 /// Key all values for a given key in the table.
 ///
