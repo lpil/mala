@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.0 - 2026-04-30
+
+- Added the `has_key` function.
+
 ## v1.1.0 - 2025-12-18
 
 - Added the `new_protected` and `new_private` functions for creating table with

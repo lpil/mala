@@ -20,6 +20,24 @@ pub fn insert_test() {
   assert mala.get(bag, "two") == Ok([])
 }
 
+pub fn has_key_test() {
+  let bag = mala.new()
+  assert mala.has_key(bag, "one") == Ok(False)
+  assert mala.has_key(bag, "two") == Ok(False)
+
+  assert mala.insert(bag, "one", 1) == Ok(Nil)
+  assert mala.has_key(bag, "one") == Ok(True)
+  assert mala.has_key(bag, "two") == Ok(False)
+
+  assert mala.insert(bag, "one", 2) == Ok(Nil)
+  assert mala.has_key(bag, "one") == Ok(True)
+  assert mala.has_key(bag, "two") == Ok(False)
+
+  assert mala.delete_key(bag, "one") == Ok(Nil)
+  assert mala.has_key(bag, "one") == Ok(False)
+  assert mala.has_key(bag, "two") == Ok(False)
+}
+
 pub fn insert_multiple_test() {
   let bag = mala.new()
   assert mala.insert(bag, "one", 1) == Ok(Nil)

@@ -69,6 +69,14 @@ type NonOwnerAccess {
 @external(erlang, "mala_ffi", "bag_get")
 pub fn get(table: BagTable(k, v), key: k) -> Result(List(v), Nil)
 
+/// Check if the table contains at least one value for the given key.
+///
+/// This function will return an error if the bag has been dropped, either explicitly
+/// with `drop_table` or implicitly by the owner process terminating.
+///
+@external(erlang, "mala_ffi", "bag_has_key")
+pub fn has_key(bag: BagTable(k, v), key: k) -> Result(Bool, Nil)
+
 /// Insert a value for the given key in the table. If the key already has this
 /// value then there will be no change.
 ///
