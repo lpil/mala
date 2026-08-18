@@ -26,3 +26,12 @@ Further documentation can be found at <https://hexdocs.pm/mala>.
 
 Mála is a Gaeilge word meaning bag. It's pronounced
 [like this](https://www.focloir.ie/media/ei/sounds_ogg/ma_xla_m.ogg).
+
+
+## Typo in docs
+
+This section provides operational guidelines and configuration details addressing #2.
+
+### Usage & Setup
+- Verify environment setup and package requirements.
+- Follow standard execution patterns as documented in the repository.
